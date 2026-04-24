@@ -1,6 +1,7 @@
 import React from 'react'
+import { UserMenu } from './UserMenu'
 
-type View = 'home' | 'chat' | 'vault' | 'meetings'
+type View = 'home' | 'chat' | 'vault' | 'meetings' | 'settings'
 
 interface Props {
   activeView: View
@@ -10,6 +11,7 @@ interface Props {
   onNavigate: (view: View) => void
   onNewChat: () => void
   onSelectChat: (id: string) => void
+  onOpenSettings: () => void
 }
 
 export function Sidebar({
@@ -19,7 +21,8 @@ export function Sidebar({
   activeChatId,
   onNavigate,
   onNewChat,
-  onSelectChat
+  onSelectChat,
+  onOpenSettings
 }: Props) {
   return (
     <div className="w-[220px] flex-shrink-0 bg-[#f7f7f5] border-r border-[#e8e8e6] flex flex-col h-full select-none">
@@ -107,14 +110,17 @@ export function Sidebar({
 
       <div className="flex-1" />
 
-      {/* Status + privacy at bottom */}
-      <div className="px-4 py-4 border-t border-[#e8e8e6]">
-        <div className="flex items-center gap-2">
+      {/* Bottom: status + user menu */}
+      <div className="px-3 pb-3 pt-2 border-t border-[#e8e8e6] space-y-1">
+        {/* AI status pill */}
+        <div className="flex items-center gap-2 px-3 py-1.5">
           <div className={`w-1.5 h-1.5 rounded-full flex-shrink-0 ${ollamaRunning ? 'bg-emerald-500' : 'bg-amber-400'}`} />
-          <span className="text-[11px] text-[#999]">
+          <span className="text-[11px] text-[#bbb]">
             {ollamaRunning ? 'AI ready · on-device' : 'Starting AI...'}
           </span>
         </div>
+        {/* User / settings button */}
+        <UserMenu onOpenSettings={onOpenSettings} />
       </div>
     </div>
   )

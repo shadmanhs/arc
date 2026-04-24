@@ -4,9 +4,10 @@ import { HomePage } from './pages/HomePage'
 import { ChatPage } from './pages/ChatPage'
 import { VaultPage } from './pages/VaultPage'
 import { MeetingsPage } from './pages/MeetingsPage'
+import { SettingsPage } from './pages/SettingsPage'
 import { useChat } from './hooks/useChat'
 
-type View = 'home' | 'chat' | 'vault' | 'meetings'
+type View = 'home' | 'chat' | 'vault' | 'meetings' | 'settings'
 
 interface RecentChat {
   id: string
@@ -64,6 +65,10 @@ export function App() {
     setView(v)
   }, [])
 
+  const handleOpenSettings = useCallback(() => {
+    setView('settings')
+  }, [])
+
   return (
     <div
       className="flex h-screen bg-white font-sans"
@@ -83,6 +88,7 @@ export function App() {
         onNavigate={handleNavigate}
         onNewChat={handleNewChat}
         onSelectChat={handleSelectChat}
+        onOpenSettings={handleOpenSettings}
       />
 
       <main className="flex-1 flex flex-col min-w-0 bg-white">
@@ -98,6 +104,7 @@ export function App() {
         )}
         {view === 'vault' && <VaultPage />}
         {view === 'meetings' && <MeetingsPage />}
+        {view === 'settings' && <SettingsPage onClose={() => setView('home')} />}
       </main>
     </div>
   )
