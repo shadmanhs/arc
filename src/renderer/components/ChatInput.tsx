@@ -23,8 +23,8 @@ export function ChatInput({ onSend, disabled }: Props) {
   }
 
   return (
-    <div className="border-t border-[#e5e5e5] px-6 py-4">
-      <div className="flex items-end gap-3 bg-[#f9f9f9] rounded-2xl border border-[#e0e0e0] px-4 py-3">
+    <div className="border-t border-[#f0f0f0] px-6 py-4 bg-white">
+      <div className="flex items-end gap-3 bg-[#f7f7f5] rounded-2xl border border-[#e8e8e6] px-4 py-3">
         <textarea
           className="flex-1 bg-transparent resize-none outline-none text-[15px] text-[#1a1a1a] placeholder:text-[#aaa] max-h-40 min-h-[24px]"
           placeholder="Ask anything..."

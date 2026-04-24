@@ -1,15 +1,19 @@
 import React from 'react'
-import { useChat } from '../hooks/useChat'
+import { ChatMessage } from '../hooks/useChat'
 import { MessageList } from '../components/MessageList'
 import { ChatInput } from '../components/ChatInput'
 
-export function ChatPage() {
-  const { messages, isStreaming, sendMessage } = useChat()
+interface Props {
+  messages: ChatMessage[]
+  isStreaming: boolean
+  onSend: (text: string) => void
+}
 
+export function ChatPage({ messages, isStreaming, onSend }: Props) {
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex-1 flex flex-col min-h-0">
       <MessageList messages={messages} />
-      <ChatInput onSend={sendMessage} disabled={isStreaming} />
+      <ChatInput onSend={onSend} disabled={isStreaming} />
     </div>
   )
 }
